@@ -1,0 +1,19 @@
+#final img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+#final {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: black;
+    text-align: center;
+}
+
+#final img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}

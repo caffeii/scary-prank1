@@ -1,0 +1,156 @@
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>System Warning</title>
+
+<style>
+    body {
+        margin: 0;
+        background: black;
+        color: red;
+        font-family: monospace;
+        overflow: hidden;
+    }
+
+    /* 最初の警告画面 */
+    #warning {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 30px;
+    }
+
+    #count {
+        font-size: 100px;
+        margin-top: 30px;
+    }
+
+    /* 偽エラー */
+    .popup {
+        position: fixed;
+        background: #111;
+        border: 2px solid red;
+        padding: 20px;
+        color: red;
+        box-shadow: 0 0 20px red;
+    }
+
+    /* 最後の画面 */
+    #final {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: black;
+        color: white;
+        text-align: center;
+    }
+
+    /* 怖い画像 */
+    #final img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+
+    /* 「許さない」の文字 */
+    #message {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 60px;
+        text-shadow: 0 0 15px black;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- 最初の画面 -->
+<div id="warning">
+    <div>⚠ SYSTEM WARNING ⚠</div>
+    <div>重大なエラーを検出しました</div>
+    <div id="count">10</div>
+</div>
+
+
+<!-- 最後に表示する画面 -->
+<div id="final">
+
+    <img src="scary.jpg" alt="怖い画像">
+
+    <div id="message">
+        許さない
+    </div>
+
+</div>
+
+
+<script>
+
+let count = 10;
+
+
+/* カウントダウン */
+const timer = setInterval(() => {
+
+    count--;
+
+    document.getElementById("count").textContent = count;
+
+
+    /* 0になったら最後の画面へ */
+    if (count <= 0) {
+
+        clearInterval(timer);
+
+        document.getElementById("warning").style.display = "none";
+
+        document.getElementById("final").style.display = "block";
+    }
+
+}, 1000);
+
+
+
+/* 偽のエラーウィンドウを表示 */
+setInterval(() => {
+
+    const popup = document.createElement("div");
+
+    popup.className = "popup";
+
+    popup.textContent = "ERROR: SYSTEM FAILURE";
+
+
+    /* ランダムな場所に表示 */
+    popup.style.left =
+        Math.random() * (window.innerWidth - 250) + "px";
+
+    popup.style.top =
+        Math.random() * (window.innerHeight - 100) + "px";
+
+
+    document.body.appendChild(popup);
+
+
+    /* 1秒後に消す */
+    setTimeout(() => {
+
+        popup.remove();
+
+    }, 1000);
+
+}, 300);
+
+</script>
+
+</body>
+</html>
+```
